@@ -1,6 +1,6 @@
 #![doc(test(no_crate_inject))]
 /*!
-# actix-web static files as resources support
+# actori-web static files as resources support
 
 ## Legal
 
@@ -9,7 +9,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 ## Features
 
 - Embed static resources in end binary
-- Serve static resources as directory in `actix-web`
+- Serve static resources as directory in `actori-web`
 - Install package manager (npm) dependincies
 
 ## Usage
@@ -24,14 +24,14 @@ mkdir static
 echo "Hello, world" > static/hello
 ```
 
-Add to `Cargo.toml` dependency to `actix-web-static-files`:
+Add to `Cargo.toml` dependency to `actori-web-static-files`:
 
 ```toml
 [dependencies]
-actix-web-static-files = "0.3"
+actori-web-static-files = "0.3"
 
 [build-dependencies]
-actix-web-static-files = "0.3"
+actori-web-static-files = "0.3"
 ```
 
 Add build script to `Cargo.toml`:
@@ -44,7 +44,7 @@ build = "build.rs"
 Add `build.rs` with call to bundle resources:
 
 ```rust#ignore
-use actix_web_static_files::resource_dir;
+use actori_web_static_files::resource_dir;
 
 fn main() {
     resource_dir("./static").build().unwrap();
@@ -54,18 +54,18 @@ fn main() {
 Include generated code in `main.rs`:
 
 ```rust#ignore
-use actix_web::{App, HttpServer};
-use actix_web_static_files;
+use actori_web::{App, HttpServer};
+use actori_web_static_files;
 
 use std::collections::HashMap;
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
-#[actix_rt::main]
+#[actori_rt::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         let generated = generate();
-        App::new().service(actix_web_static_files::ResourceFiles::new(
+        App::new().service(actori_web_static_files::ResourceFiles::new(
             "/static", generated,
         ))
     })
@@ -126,7 +126,7 @@ Add `dependencies` and `build-dependencies` in `Cargo.toml` same way as in the f
 Add `build.rs` with call to bundle resources:
 
 ```rust#ignore
-use actix_web_static_files::npm_resource_dir;
+use actori_web_static_files::npm_resource_dir;
 
 fn main() {
     npm_resource_dir("./static_packages").unwrap().build().unwrap();

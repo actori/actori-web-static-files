@@ -1,32 +1,32 @@
 [package]
-authors = ["Alexander Korolev <kilork@yandex.ru>"]
+authors = ["Christian Haynes <06chaynes@gmail.com>", "Alexander Korolev <kilork@yandex.ru>"]
 build = "build.rs"
 categories = ["network-programming",
               "asynchronous",
               "web-programming::http-server"]
 description = """
-actix-web static files as resources support.
+actori-web static files as resources support.
 """
 edition = "2018"
-homepage = "https://github.com/kilork/actix-web-static-files"
-keywords = ["actix", "http", "web", "static"]
+homepage = "https://github.com/actori/actori-web-static-files"
+keywords = ["actori", "http", "web", "static"]
 license = "Unlicense OR MIT"
-name = "actix-web-static-files"
+name = "actori-web-static-files"
 readme = "README.md"
-repository = "https://github.com/kilork/actix-web-static-files"
+repository = "https://github.com/actori/actori-web-static-files"
 version = "0.3.0"
 
 [dependencies]
-actix-web = "2.0"
-actix-service = "1.0"
+actori-web = "2.0"
+actori-service = "1.0"
 futures = "0.3"
 mime_guess = "2.0"
 failure = "0.1"
 path-slash = "0.1"
 
 [build-dependencies]
-actix-web = "2.0"
-actix-service = "1.0"
+actori-web = "2.0"
+actori-service = "1.0"
 futures = "0.3"
 mime_guess = "2.0"
 failure = "0.1"

@@ -1,5 +1,5 @@
-use actix_service::{Service, ServiceFactory};
-use actix_web::{
+use actori_service::{Service, ServiceFactory};
+use actori_web::{
     dev::{AppService, HttpServiceFactory, ResourceDef, ServiceRequest, ServiceResponse},
     error::Error,
     http::{header, Method, StatusCode},
@@ -35,12 +35,12 @@ pub struct Resource {
 /// ```rust
 /// use std::collections::HashMap;
 ///
-/// use actix_web::App;
+/// use actori_web::App;
 ///
 /// fn main() {
-///     let files: HashMap<&'static str, actix_web_static_files::Resource> = HashMap::new();
+///     let files: HashMap<&'static str, actori_web_static_files::Resource> = HashMap::new();
 ///     let app = App::new()
-///         .service(actix_web_static_files::ResourceFiles::new(".", files));
+///         .service(actori_web_static_files::ResourceFiles::new(".", files));
 /// }
 /// ```
 pub struct ResourceFiles {
@@ -305,7 +305,7 @@ fn collect_resources<P: AsRef<Path>>(
 /// // Generate resources for ./tests dir with file name generated.rs
 /// // stored in path defined by OUT_DIR environment variable.
 /// // Function name is 'generate'
-/// use actix_web_static_files::resource_dir;
+/// use actori_web_static_files::resource_dir;
 ///
 /// resource_dir("./tests").build().unwrap();
 /// ```
@@ -368,7 +368,7 @@ pub struct ResourceDir {
 ///
 /// use std::env;
 /// use std::path::Path;
-/// use actix_web_static_files::generate_resources;
+/// use actori_web_static_files::generate_resources;
 ///
 /// let out_dir = env::var("OUT_DIR").unwrap();
 /// let generated_filename = Path::new(&out_dir).join("generated.rs");
@@ -378,7 +378,7 @@ pub struct ResourceDir {
 /// in `main.rs`:
 /// ```rust
 /// use std::collections::HashMap;
-/// use actix_web::App;
+/// use actori_web::App;
 ///
 /// include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 ///
@@ -388,7 +388,7 @@ pub struct ResourceDir {
 ///     assert_eq!(generated_file.len(), 3);
 ///
 ///     let app = App::new()
-///         .service(actix_web_static_files::ResourceFiles::new(
+///         .service(actori_web_static_files::ResourceFiles::new(
 ///            "/static",
 ///            generated_file,
 ///        ));
@@ -406,8 +406,8 @@ pub fn generate_resources<P: AsRef<Path>, G: AsRef<Path>>(
 
     writeln!(
         f,
-        "#[allow(clippy::unreadable_literal)] pub fn {}() -> HashMap<&'static str, actix_web_static_files::Resource> {{
-use actix_web_static_files::Resource;
+        "#[allow(clippy::unreadable_literal)] pub fn {}() -> HashMap<&'static str, actori_web_static_files::Resource> {{
+use actori_web_static_files::Resource;
 let mut result = HashMap::new();",
         fn_name
     )?;
